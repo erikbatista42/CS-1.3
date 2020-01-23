@@ -17,8 +17,14 @@ def decode(digits, base):
     return: int -- integer representation of number (in base 10)"""
     # Handle up to base 36 [0-9a-z]
     assert 2 <= base <= 36, 'base is out of range: {}'.format(base)
+
     # TODO: Decode digits from binary (base 2)
-    # ...
+    if base == 2:
+        total_sum = 0
+        for i, num in enumerate(reversed(digits)):
+            if num == "1":
+                total_sum += 2**i
+        return total_sum
     # TODO: Decode digits from hexadecimal (base 16)
     # ...
     # TODO: Decode digits from any base (2 up to 36)
@@ -35,7 +41,18 @@ def encode(number, base):
     # Handle unsigned numbers only for now
     assert number >= 0, 'number is negative: {}'.format(number)
     # TODO: Encode number in binary (base 2)
-    # ...
+    if base == 2:
+        output = ""
+        while number != 0:
+            # get remainder
+            remainder = number % 2
+            # divide number by 2 (base)
+            number = number // base
+            output += str(remainder)
+            
+        # return reversed ouput str
+        return output[::-1]
+
     # TODO: Encode number in hexadecimal (base 16)
     # ...
     # TODO: Encode number in any base (2 up to 36)
